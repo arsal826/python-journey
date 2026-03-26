@@ -8,7 +8,7 @@ print(v2)
 
 #smart move 
 
-v1 = "on srting"
+v1 = "one srting"
 v2 = "second string"
 v1, v2 = v2, v1
 print(v1)
