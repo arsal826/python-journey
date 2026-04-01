@@ -1,0 +1,10 @@
+friend=["apple" , "banana" , "orange" , "grape" , "watermelon" , "strawberry" , "blueberry" , "raspberry" , "peach" , "pear"]
+print(friend[0])
+friend.append("melon")
+print(friend)
+friend.append("avocado")
+print(friend)
+friend.pop(5)  
+print(friend)
+friend.pop(10)
+print(friend) 
