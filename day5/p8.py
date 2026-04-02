@@ -1,4 +1,9 @@
-Merge two dictionaries into one:
-    dict1 = {"name": "Arsal", "age": 23}
-    dict2 = {"city": "Lahore", "grade": 85}
-    Expected: all 4 keys in one dictionary
+    # Merge two dictionaries into one:
+    #     dict1 = {"name": "Arsal", "age": 23}
+    #     dict2 = {"city": "Lahore", "grade": 85}
+    #     Expected: all 4 keys in one dictionary
+
+dict1 = {"name": "Arsal", "age": 23}
+dict2 = {"city": "Lahore", "grade": 85}
+merged_dict = {**dict1, **dict2}
+print(merged_dict)
