@@ -1,12 +1,4 @@
-# Calculate and print:
-# ```
-# → Total sales per region
-# → Average sales per region
-# → Top performer in each region (highest amount)
-# → Which region made the most total sales
-# → How many salespeople in each region
-
-sales= [
+sales = [
     {"name": "Arsal",  "region": "north", "amount": 45000},
     {"name": "Ahmed",  "region": "south", "amount": 62000},
     {"name": "Sara",   "region": "north", "amount": 38000},
@@ -16,45 +8,101 @@ sales= [
     {"name": "Mia",    "region": "north", "amount": 91000},
     {"name": "John",   "region": "east",  "amount": 33000}
 ]
-sales_counts = {}
-sales_totals = {}
-sales_top = {}
-salespeople_counts = {}
-second_largest = {}
-second_lowest = {}
+
+# ─────────────────────────────────────
+# NOTEBOOK 1 — tracks total sales per region
+# starts empty
+# after loop: {"north": 174000, "south": 117000, "east": 152000}
+# ─────────────────────────────────────
+totals = {}
+
+# ─────────────────────────────────────
+# NOTEBOOK 2 — tracks how many people per region
+# starts empty
+# after loop: {"north": 3, "south": 2, "east": 3}
+# ─────────────────────────────────────
+counts = {}
+
+# ─────────────────────────────────────
+# NOTEBOOK 3 — tracks top performer per region
+# starts empty
+# after loop: {
+#   "north": {"name": "Mia",   "amount": 91000},
+#   "south": {"name": "Ahmed", "amount": 62000},
+#   "east":  {"name": "Ali",   "amount": 71000}
+# }
+# ─────────────────────────────────────
+top = {}
+
+# ─────────────────────────────────────
+# MAIN LOOP — go through every sale one by one
+# ─────────────────────────────────────
 for sale in sales:
-    region = sale["region"]
-    amount = sale["amount"]
-    name = sale["name"]
 
-    if region not in sales_counts:
-        sales_counts[region] = 0
-        sales_totals[region] = 0
-        sales_top[region] = {"name": name, "amount": amount}
-        salespeople_counts[region] = 0
-        second_largest[region] = {"name": None, "amount": float('-inf')}
-        second_lowest[region] = {"name": None, "amount": float('inf')}
+    # extract the 3 fields we need
+    region = sale["region"]   # "north" "south" or "east"
+    amount = sale["amount"]   # 45000, 62000 etc
+    name   = sale["name"]     # "Arsal", "Ahmed" etc
 
-    sales_counts[region] += 1
-    sales_totals[region] += amount
-    salespeople_counts[region] += 1
+    # ─────────────────────────────────
+    # FIRST TIME seeing this region?
+    # create a fresh page in each notebook
+    # ─────────────────────────────────
+    if region not in totals:
 
-    if amount > sales_top[region]["amount"]:
-        sales_top[region] = {"name": name, "amount": amount}
-    if amount > second_largest[region]["amount"] and amount != sales_top[region]["amount"]:
-        second_largest[region] = {"name": name, "amount": amount}
-    if amount < second_lowest[region]["amount"] and amount != sales_top[region]["amount"]:
-        second_lowest[region] = {"name": name, "amount": amount}
-for region in sales_counts:
-    total = sales_totals[region]
-    count = sales_counts[region]
-    avg = total / count
-    top_performer = sales_top[region]
-    second_performer = second_largest[region]
-    lowest_performer = second_lowest[region]
-    print(f"Region: {region}")
-    print(f"  Total Sales: {total}")
-    print(f"  Average Sales: {avg:.2f}")
-    print(f"  Top Performer: {top_performer['name']} ({top_performer['amount']})")
-    print(f"  Second Performer: {second_performer['name']} ({second_performer['amount']})")
-    print(f"  Lowest Performer: {lowest_performer['name']} ({lowest_performer['amount']})")
+        # notebook 1 — start total at 0
+        # cannot add to something that does not exist
+        totals[region] = 0
+
+        # notebook 2 — start count at 0
+        counts[region] = 0
+
+        # notebook 3 — assume first person is top performer
+        # will update this if someone better comes along
+        top[region] = {"name": name, "amount": amount}
+
+    # ─────────────────────────────────
+    # ALWAYS runs — every person every region
+    # ─────────────────────────────────
+
+    # add this person's amount to region total
+    totals[region] += amount
+
+    # one more person in this region
+    counts[region] += 1
+
+    # ─────────────────────────────────
+    # is this person the top performer?
+    # ─────────────────────────────────
+    if amount > top[region]["amount"]:
+        # yes — update the top performer
+        top[region] = {"name": name, "amount": amount}
+
+# ─────────────────────────────────────
+# LOOP IS DONE — all employees processed
+# now calculate and print results
+# ─────────────────────────────────────
+
+# track best region for final summary
+best_region = ""
+best_total  = 0
+
+for region in totals:
+
+    # calculate average for this region
+    avg = totals[region] / counts[region]
+
+    # check if this is the best region so far
+    if totals[region] > best_total:
+        best_total  = totals[region]
+        best_region = region
+
+    # print this region's report
+    print(f"\n{region.upper()}")
+    print(f"  People:    {counts[region]}")
+    print(f"  Total:     {totals[region]}")
+    print(f"  Average:   {avg:.2f}")
+    print(f"  Top seller:{top[region]['name']} ({top[region]['amount']})")
+
+# print the overall winner
+print(f"\nBest region: {best_region.upper()} ({best_total})")
