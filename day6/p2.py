@@ -53,9 +53,9 @@ products = [
     {"name": "watch",   "price": 25000,  "stock": 0},
     {"name": "earbuds", "price": 15000,  "stock": 8}
 ]
-for name, price, stock in products:
-    if stock > 0:
-        print(f"{name} is in stock")
+for product in products:
+    if product["stock"] > 0:
+        print(f"{product['name']} is in stock")
 most_expensive = products[0]
 total_value = 0
 for product in products:

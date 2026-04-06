@@ -51,4 +51,4 @@ students = [
 
 grade_groups = group_by_grade(students)
 for grade, names in grade_groups.items():
-    print(f"{grade} ({' '.join(names)})")
+    print(f"{grade} → {', '.join(names)}")
