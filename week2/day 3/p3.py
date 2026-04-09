@@ -44,7 +44,7 @@ highest_balance_account = max(coustomer_data, key=lambda x: coustomer_data[x]["b
 most_transactions_account = max(transction_count, key=transction_count.get)
 
 print(f"Customer with highest balance: {highest_balance_account} (Balance: {coustomer_data[highest_balance_account]['balance']})")
-print(f"Customer with most transactions: {most_transactions_account} (Transactions: {transction_count[most_transactions_account]})")
+print(f"Customer with most transactions: {most_transactions_account} (Transactions:  {transction_count[most_transactions_account]})")
 print("\n Highest single transaction:")
 for account, data in coustomer_data.items():
     if data["highest_transaction"][1] > 0:
