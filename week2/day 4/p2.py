@@ -31,7 +31,6 @@ for sale in sales:
         customer_data[customer]["book_spending"][book] = 0
     
     customer_data[customer]["purchases"].append(sale)
-    total_price = quantity * sale["price"]
     customer_data[customer]["total_spent"] += total_price
     customer_data[customer]["book_counts"][book] += quantity
     customer_data[customer]["book_spending"][book] += total_price
