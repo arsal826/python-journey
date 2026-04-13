@@ -10,7 +10,6 @@ orders = [
 coustomer_data = {}
 popular_restaurant = {}
 highest_revenue_restaurant = {}
-
 for order in orders:
     customer = order["customer"]
     restaurant = order["restaurant"]
