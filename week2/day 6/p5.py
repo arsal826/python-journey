@@ -17,7 +17,6 @@
 # Sara has higher grade (92 vs 85)
 # Ali is older (20 vs 19)
 # Returns: Sara's dict
-
 def compare_students(s1, s2):
     if s1["grade"] > s2["grade"]:
         print(f"{s1['name']} has higher grade ({s1['grade']} vs {s2['grade']})")
@@ -40,7 +39,7 @@ def compare_students(s1, s2):
 
 # Example usage
 result = compare_students(
-    {"name": "Ali",  "grade": 85, "age": 20},
+    {"name": "Ali",  "grade": 85, "age": 19},
     {"name": "Sara", "grade": 92, "age": 19}
 )
 print("Returns:", result)
