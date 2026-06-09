@@ -16,4 +16,4 @@ for name in scores:
 print("New scores after adding 5 marks:")
 for name, score in scores.items():
     print(f"{name}: {score}")
-    
+        
