@@ -1,0 +1,4 @@
+food,500
+transport,200
+shopping,800
+food,500
